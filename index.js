@@ -10,7 +10,8 @@ const movies = [
     { title: 'Avatar', year: 2009, rating: 7.8 },
     { title: 'Brazil', year: 1985, rating: 8 },
     { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
-]
+];
+
 
 app.listen(port, function () {
     console.log(`Example app listening on port ${port}.`);
@@ -53,4 +54,21 @@ app.get('/movies/update', function (request, res) {
 });
 app.get('/movies/delete', function (request, res) {
     res.status(200).send("Delete");
+});
+
+
+//Step 6
+app.get('/movies/read/by-date', function (request, res) {
+    const mo = movies.sort((a, b) => a.year - b.year);
+    res.status(200).send(mo);
+});
+
+app.get('/movies/read/by-rating', function (request, res) {
+    const mo = movies.sort((a, b) => b.rating- a.rating );
+    res.status(200).send(mo);
+});
+
+app.get('/movies/read/by-title', function (request, res) {
+    const mo = movies.sort((a, b) => a.title.localeCompare(b.title));
+    res.status(200).send(mo);
 });
